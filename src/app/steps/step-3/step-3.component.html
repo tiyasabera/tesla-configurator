@@ -1,0 +1,59 @@
+<app-navbar [isStep1Valid]="isStep1Valid" [isStep2Valid] = "isStep2Valid"></app-navbar>
+<h1>Step 3: Summary</h1>
+
+@if (step1FormState?.currentModel) {
+    <div class="step-3-container">
+        <h2>Your Tesla {{ step1FormState?.currentModel }}</h2>
+
+        <table>
+            <tbody>
+                @if (step2FormState?.currentConfig) {
+                    <tr>
+                        <td class="option">{{ step2FormState?.currentConfig }}</td>
+                        <td>{{ step2FormState?.configs?.price | currencyFormat}}</td>
+                    </tr>
+                }
+
+                @if (step2FormState?.configs?.range) {
+                    <tr>
+                        <td>Range - {{ step2FormState?.configs?.range }} miles - Max speed: {{ step2FormState?.configs?.speed }}</td>
+                    </tr>
+                }
+
+                @if (step1FormState?.selectedColor?.description) {
+                    <tr>
+                        <td class="option">{{ step1FormState?.selectedColor?.description }}</td>
+                        <td> {{ step1FormState?.selectedColor?.price | currencyFormat}}</td>
+                    </tr>
+                }
+
+                @if (step2FormState?.towHitch) {
+                    <tr>
+                        <td class="option">Tow Hitch Package</td>
+                        <td>{{ OPTION_UPSELL_PRICE | currencyFormat }}</td>
+                    </tr>
+                }
+
+                @if (step2FormState?.yoke) {
+                    <tr>
+                        <td class="option">Yoke Package</td>
+                        <td>{{ OPTION_UPSELL_PRICE | currencyFormat }}</td>
+                    </tr>
+                }
+
+                @if (totalPrice) {
+                    <tr class="bordered">
+                        <td class="total">total cost</td>
+                        <td>{{ totalPrice | currencyFormat }}</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    @if (imagePath) {
+        <div class="step-3-image">
+            <img [src]="imagePath" width="1330" height="738">
+        </div>
+    }
+}
+
